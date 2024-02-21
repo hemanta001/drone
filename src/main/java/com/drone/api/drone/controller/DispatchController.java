@@ -31,7 +31,7 @@ public class DispatchController {
 
     @Operation(summary = "Load Drone")
     @PostMapping(value = "load")
-    public ResponseEntity<?> load(@RequestBody DroneLoadDto droneLoadDto) {
+    public ResponseEntity<?> load(@Valid @RequestBody DroneLoadDto droneLoadDto) {
         return ResponseEntity.ok(this.dispatchService.load(droneLoadDto));
     }
 

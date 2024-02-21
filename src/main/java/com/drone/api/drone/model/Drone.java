@@ -1,6 +1,8 @@
 package com.drone.api.drone.model;
 
+import com.drone.api.drone.validator.CustomValidation;
 import com.drone.api.validator.enumvalidator.ValueOfEnum;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -31,7 +33,7 @@ public class Drone {
     @Size(min = 1, max = 100, message = "Serial Number must not exceed 100 characters")
     private String serialNumber;
 
-    @Schema(description = "The model type of drone")
+    @Schema(description = "The model type of drone", defaultValue = "LightWeight")
     @NotBlank(message = "model type is required")
     @ValueOfEnum(enumClass = ModelType.class, message = "must be of any from value from LightWeight, Middleweight, CruiserWeight, HeavyWeight")
     private String modelType;
@@ -48,17 +50,16 @@ public class Drone {
     @Valid
     private double batteryCapacity;
 
-    @Schema(description = "State of drone")
+    @Schema(description = "State of drone", defaultValue = "IDLE")
     @ValueOfEnum(enumClass = State.class, message = "must be of any from value from IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING")
+    @Hidden
     private String state;
 
     @OneToMany(mappedBy = "droneId", fetch = FetchType.LAZY)
+    @Hidden
     private List<Medication> medicationList;
 
-
-    public List<Medication> getMedicationList() {
-        return this.medicationList.stream()
-                .peek(value -> value.setDroneId(this.id))
-                .collect(Collectors.toList());
+    public String getState() {
+        return this.batteryCapacity < 25.00 ? State.IDLE.getValue() : State.LOADING.getValue();
     }
 }

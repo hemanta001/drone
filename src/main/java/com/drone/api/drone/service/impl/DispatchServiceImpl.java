@@ -22,9 +22,7 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Override
     public ResponseDto register(Drone drone) {
-        drone = this.droneRepository.save(drone);
-        drone.setMedicationList(this.medicationRepository.saveAll(drone.getMedicationList()));
-        return new ResponseDto(drone);
+        return new ResponseDto(this.droneRepository.save(drone));
     }
 
     @Override

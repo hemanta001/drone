@@ -27,11 +27,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         //Get all errors
         List<String> errors = ex.getBindingResult()
-                .getFieldErrors()
+                .getAllErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-
         body.put("errors", errors);
 
         return new ResponseEntity<>(body, headers, status);
