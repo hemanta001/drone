@@ -31,4 +31,19 @@ public class DispatchServiceImpl implements DispatchService {
     public ResponseDto load(DroneLoadDto droneLoadDto) {
         return new ResponseDto(this.medicationRepository.saveAll(droneLoadDto.getMedicationList()));
     }
+
+    @Override
+    public ResponseDto getLoadedMedications(Long id) {
+        return new ResponseDto(this.medicationRepository.findAllByDroneId(id));
+    }
+
+    @Override
+    public ResponseDto getAvailableDrones() {
+        return new ResponseDto(this.droneRepository.getAvailableDrones());
+    }
+
+    @Override
+    public ResponseDto getBatteryPercentage(Long id) {
+        return new ResponseDto(this.droneRepository.getBatteryPercentage(id));
+    }
 }

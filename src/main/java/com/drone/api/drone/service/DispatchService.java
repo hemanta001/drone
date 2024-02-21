@@ -11,4 +11,10 @@ public interface DispatchService {
     ResponseDto register(Drone drone);
 
     ResponseDto load(DroneLoadDto droneLoadDto);
+
+    ResponseDto getLoadedMedications(Long droneId);
+
+    ResponseDto getAvailableDrones();
+
+    ResponseDto getBatteryPercentage(Long id);
 }

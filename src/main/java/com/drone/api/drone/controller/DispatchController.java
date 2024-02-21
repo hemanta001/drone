@@ -26,33 +26,30 @@ public class DispatchController {
     @Operation(summary = "Register Drone")
     @PostMapping(value = "register")
     public ResponseEntity<?> register(@Valid @RequestBody Drone drone) {
-        return ResponseEntity.ok(dispatchService.register(drone));
+        return ResponseEntity.ok(this.dispatchService.register(drone));
     }
 
     @Operation(summary = "Load Drone")
     @PostMapping(value = "load")
     public ResponseEntity<?> load(@RequestBody DroneLoadDto droneLoadDto) {
-        return ResponseEntity.ok(dispatchService.load(droneLoadDto));
+        return ResponseEntity.ok(this.dispatchService.load(droneLoadDto));
+    }
+
+    @Operation(summary = "Get Loaded Medications of Drone By Id")
+    @GetMapping(value = "{id}/loaded-medications")
+    public ResponseEntity<?> getLoadedMedications(@PathVariable Long id) {
+        return ResponseEntity.ok(this.dispatchService.getLoadedMedications(id));
     }
 
     @Operation(summary = "Get availability List")
     @GetMapping(value = "available-list")
-    public ResponseEntity<?> getAvailableDrones(@PathVariable Long id) {
-
-        return new ResponseEntity<>(null);
-    }
-
-    @Operation(summary = "Check Load of Drone By Id")
-    @GetMapping(value = "{id}/check-load")
-    public ResponseEntity<?> checkLoad(@PathVariable Long id) {
-
-        return new ResponseEntity<>(null);
+    public ResponseEntity<?> getAvailableDrones() {
+        return ResponseEntity.ok(this.dispatchService.getAvailableDrones());
     }
 
     @Operation(summary = "Check Battery of Drone By Id")
     @GetMapping(value = "{id}/check-battery")
-    public ResponseEntity<?> checkBattery(@PathVariable Long id) {
-
-        return new ResponseEntity<>(null);
+    public ResponseEntity<?> getBatteryPercentage(@PathVariable Long id) {
+        return ResponseEntity.ok(this.dispatchService.getBatteryPercentage(id));
     }
 }

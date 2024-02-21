@@ -39,7 +39,7 @@ public class Drone {
     @Schema(description = "Weight in Gram")
     @Column
     @Max(value = 500, message = "Value must be less than or equal to 500")
-    private double weightInGram;
+    private double weightLimitInGram;
 
     @Schema(description = "Battery Percentage")
     @Column
@@ -55,10 +55,6 @@ public class Drone {
     @OneToMany(mappedBy = "droneId", fetch = FetchType.LAZY)
     private List<Medication> medicationList;
 
-    public Drone(Long id, List<Medication> medicationList) {
-        this.id = id;
-        this.medicationList = medicationList;
-    }
 
     public List<Medication> getMedicationList() {
         return this.medicationList.stream()
