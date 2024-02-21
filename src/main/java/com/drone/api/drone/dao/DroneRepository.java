@@ -12,7 +12,7 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
     @Query("SELECT NEW com.drone.api.drone.model.AvailableDroneDto(d.id, d.serialNumber, d.modelType, d.weightLimitInGram, d.batteryCapacity, d.state, SUM(med.weightInGram))" +
             "FROM Drone d " +
             "INNER JOIN Medication med ON d.id = med.droneId " +
-            "WHERE d.state = 'IDLE' " +
+            "WHERE d.state = 'LOADING' " +
             "  AND d.batteryCapacity >= 25 " +
             "GROUP BY d.id, d.serialNumber, d.modelType, d.weightLimitInGram, d.batteryCapacity, d.state " +
             "HAVING d.weightLimitInGram > SUM(med.weightInGram)")
