@@ -21,11 +21,14 @@ public class CustomValidator implements ConstraintValidator<CustomValidation, Dr
 
     @Override
     public boolean isValid(DroneLoadDto droneLoadDto, ConstraintValidatorContext context) {
-        // Implement your custom validation logic here
         double sum = droneLoadDto.getMedicationList().stream()
                 .mapToDouble(Medication::getWeightInGram)
                 .sum();
-        return this.droneRepository.checkDroneLoadingEligibility(droneLoadDto.getDroneId(), sum);
+        Object eligibility = this.droneRepository.checkDroneLoadingEligibility(droneLoadDto.getDroneId(), sum);
+        if (null == eligibility) {
+            return true;
+        }
+        return (Boolean) eligibility;
     }
 }
 

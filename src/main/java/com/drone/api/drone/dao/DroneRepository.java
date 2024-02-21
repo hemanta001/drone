@@ -32,7 +32,7 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
             "INNER JOIN Medication med ON d.id = med.droneId " +
             "WHERE d.id=:id " +
             "GROUP BY d.id, d.serialNumber, d.modelType, d.weightLimitInGram, d.batteryCapacity, d.state ")
-    boolean checkDroneLoadingEligibility(Long id, double weightOfMedicationsLoad);
+    Object checkDroneLoadingEligibility(Long id, double weightOfMedicationsLoad);
 
     @Query("select d.batteryCapacity from Drone d where d.id=:id")
     Double getBatteryPercentage(Long id);
