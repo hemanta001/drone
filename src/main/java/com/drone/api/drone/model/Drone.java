@@ -3,6 +3,7 @@ package com.drone.api.drone.model;
 import com.drone.api.validator.enumvalidator.ValueOfEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +11,9 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Schema(description = "Drone Detail Payload")
 @AllArgsConstructor
@@ -41,9 +45,24 @@ public class Drone {
     @Column
     @Max(value = 100, message = "Value must be between 0 and 100")
     @Min(value = 0, message = "Value must be between 0 and 100")
+    @Valid
     private double batteryCapacity;
 
     @Schema(description = "State of drone")
     @ValueOfEnum(enumClass = State.class, message = "must be of any from value from IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING")
     private String state;
+
+    @OneToMany(mappedBy = "droneId", fetch = FetchType.LAZY)
+    private List<Medication> medicationList;
+
+    public Drone(Long id, List<Medication> medicationList) {
+        this.id = id;
+        this.medicationList = medicationList;
+    }
+
+    public List<Medication> getMedicationList() {
+        return this.medicationList.stream()
+                .peek(value -> value.setDroneId(this.id))
+                .collect(Collectors.toList());
+    }
 }

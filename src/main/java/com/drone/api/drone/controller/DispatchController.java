@@ -1,13 +1,11 @@
 package com.drone.api.drone.controller;
 
-import com.drone.api.common.model.ResponseDto;
 import com.drone.api.drone.model.Drone;
 import com.drone.api.drone.model.DroneLoadDto;
 import com.drone.api.drone.service.DispatchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -28,23 +26,13 @@ public class DispatchController {
     @Operation(summary = "Register Drone")
     @PostMapping(value = "register")
     public ResponseEntity<?> register(@Valid @RequestBody Drone drone) {
-        ResponseDto responseDTO = dispatchService.register(drone);
-        if (responseDTO.getData() != null) {
-            return ResponseEntity.ok(responseDTO);
-        }
-        responseDTO.addMeta("message", "unable to register drone");
-        return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.ok(dispatchService.register(drone));
     }
 
     @Operation(summary = "Load Drone")
     @PostMapping(value = "load")
     public ResponseEntity<?> load(@RequestBody DroneLoadDto droneLoadDto) {
-        ResponseDto responseDTO = dispatchService.load(droneLoadDto);
-        if (responseDTO.getData() != null) {
-            return ResponseEntity.ok(responseDTO);
-        }
-        responseDTO.addMeta("message", "unable to load drone");
-        return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.ok(dispatchService.load(droneLoadDto));
     }
 
     @Operation(summary = "Get availability List")
