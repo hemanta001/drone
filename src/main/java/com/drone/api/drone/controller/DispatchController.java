@@ -3,14 +3,10 @@ package com.drone.api.drone.controller;
 import com.drone.api.common.model.ResponseDto;
 import com.drone.api.drone.model.Drone;
 import com.drone.api.drone.model.DroneLoadDto;
-import com.drone.api.drone.model.Medication;
 import com.drone.api.drone.service.DispatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("drone")
@@ -40,5 +36,23 @@ public class DispatchController {
         }
         responseDTO.addMeta("message", "unable to load drone");
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(value = "available-list")
+    public ResponseEntity<?> getAvailableDrones(@PathVariable Long id) {
+
+        return new ResponseEntity<>(null);
+    }
+
+    @GetMapping(value = "{id}/check-load")
+    public ResponseEntity<?> checkLoad(@PathVariable Long id) {
+
+        return new ResponseEntity<>(null);
+    }
+
+    @GetMapping(value = "{id}/check-battery")
+    public ResponseEntity<?> checkBattery(@PathVariable Long id) {
+
+        return new ResponseEntity<>(null);
     }
 }

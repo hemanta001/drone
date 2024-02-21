@@ -13,4 +13,10 @@ import lombok.NoArgsConstructor;
 public class Medication {
     @Id
     private Long id;
+
+    private double weightInGram;
+
+    private String name;
+
+    private String imageKey;
 }
