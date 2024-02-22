@@ -8,7 +8,7 @@
 
 4.open the project
 
-5.From Root path of project, Run 'docker-compose -f docker-compose-mysql.yml up' for running mysql. This will automatically create database drones
+5.From Root path of project, Run 'docker-compose -f docker-compose-mysql.yml up' for running mysql. This will automatically create database named 'drones'
 
 6.open application.properties file and update the environment variables
 
