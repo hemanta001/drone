@@ -24,7 +24,7 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ch
             acceptedValues= Stream.of(annotation.enumClass().getEnumConstants())
                     .map(object->{
                         try {
-                            return method.invoke(object, null).toString();
+                            return method.invoke(object, (Object[]) null).toString();
                         } catch (IllegalAccessException | InvocationTargetException e) {
                             LOGGER.error(e.getMessage());
                         }
