@@ -28,7 +28,7 @@ public class Drone {
     private Long id;
 
     @Schema(description = "Serial Number Of Drone")
-    @Column(length = 100)
+    @Column(length = 100,unique = true)
     @NotBlank(message = "Serial Number cannot be blank")
     @Size(min = 1, max = 100, message = "Serial Number must not exceed 100 characters")
     private String serialNumber;
