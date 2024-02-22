@@ -15,16 +15,16 @@ import java.util.stream.Stream;
 public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, CharSequence> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ValueOfEnumValidator.class);
 
-    private  List<String> acceptedValues;
+    private List<String> acceptedValues;
 
     @Override
     public void initialize(ValueOfEnum annotation) {
         try {
-            Method method = annotation.enumClass().getMethod("getValue", null);
-            acceptedValues= Stream.of(annotation.enumClass().getEnumConstants())
-                    .map(object->{
+            Method method = annotation.enumClass().getMethod("getValue");
+            acceptedValues = Stream.of(annotation.enumClass().getEnumConstants())
+                    .map(object -> {
                         try {
-                            return method.invoke(object, (Object[]) null).toString();
+                            return method.invoke(object).toString();
                         } catch (IllegalAccessException | InvocationTargetException e) {
                             LOGGER.error(e.getMessage());
                         }
