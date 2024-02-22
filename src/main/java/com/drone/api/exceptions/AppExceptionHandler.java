@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class AppExceptionHandler {

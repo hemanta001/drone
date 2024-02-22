@@ -2,6 +2,8 @@ package com.drone.api.validator.enumvalidator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, CharSequence> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ValueOfEnumValidator.class);
+
     private  List<String> acceptedValues;
 
     @Override
@@ -22,14 +26,14 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ch
                         try {
                             return method.invoke(object, null).toString();
                         } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
+                            LOGGER.error(e.getMessage());
                         }
                         return null;
                     })
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
