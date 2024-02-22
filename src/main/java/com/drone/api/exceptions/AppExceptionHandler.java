@@ -1,9 +1,6 @@
 package com.drone.api.exceptions;
 
 import com.drone.api.common.model.ResponseDto;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
