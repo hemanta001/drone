@@ -17,3 +17,5 @@
 8.From Root path of project , Run './gradlew bootRun' cmd to run application
 
 9.Application Serves on http://localhost:8080
+
+10.Swagger Docs Serves on http://localhost:8080/api/v1/swagger-ui/index.html
