@@ -14,8 +14,8 @@ public class AsyncConfig implements AsyncConfigurer {
     @Bean(name="createLog")
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(8);
-        executor.setMaxPoolSize(10);
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(8);
         executor.setQueueCapacity(10);
         executor.setThreadNamePrefix("drone-");
         executor.initialize();
